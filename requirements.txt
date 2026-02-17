@@ -1,0 +1,37 @@
+# AI Conference Networking Finder - Requirements
+# Generated: 2026-02-16
+
+# Core Django
+Django==4.2.11
+psycopg2-binary==2.9.9  # PostgreSQL adapter
+
+# REST Framework
+djangorestframework==3.14.0
+
+# Database & Vector Search
+pgvector==0.3.1  # PostgreSQL vector extension
+psycopg[binary]==3.1.13
+
+# Face Recognition & AI
+insightface==0.7.3
+onnxruntime==1.18.0
+onnx==1.15.0
+numpy==1.24.3
+opencv-python==4.8.1.78
+Pillow==10.1.0
+
+# Async Task Processing
+celery==5.3.4
+redis==5.0.1
+kombu==5.3.5
+
+# Utilities
+python-dotenv==1.0.0  # Environment variables
+python-decouple==3.8
+
+# Development (optional)
+pytest==7.4.3
+pytest-django==4.7.0
+django-extensions==3.2.3
+black==23.12.0  # Code formatter
+flake8==6.1.0   # Linter
