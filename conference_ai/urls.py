@@ -1,79 +1,114 @@
-"""
-URL configuration for conference_ai project.
-
-API Routes:
-- /api/events/           POST, GET, PUT, DELETE
-- /api/events/{id}/      GET, PUT, DELETE  
-- /api/events/{id}/upload-image/  POST
-- /api/events/{id}/images/        GET
-- 
-- /api/attendees/        GET
-- /api/attendees/{id}/   GET, PUT, PATCH
-- /api/attendees/{id}/update-selfie/  PATCH
-- /api/events/join/      POST
--
-- /api/detected-faces/   GET
-- /api/detected-faces/{id}/  GET
-- /api/detected-faces/by-event/  GET
-- /api/detected-faces/stats/  GET
--
-- /api/interactions/     GET
-- /api/interactions/{id}/ GET
-- /api/interactions/my_connections/  GET
-- /api/interactions/top_combinations/ GET
-
-Media:
-- /media/               Uploaded selfies and event images
-
-Admin:
-- /admin/               Django admin interface
-
-Technology Stack:
-- REST Framework: DRF (Django Rest Framework)
-- Routing: DefaultRouter for automatic viewset registration
-- Media: /media/ folder for uploaded files
-"""
-
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 
-# Import ViewSets from all apps
+# Import ViewSets
 from events.views import EventViewSet
-from attendees.views import AttendeeViewSet
-from recognition.views import DetectedFaceViewSet
-from interactions.views import InteractionViewSet
 
-# Create router and register viewsets
+from attendees.views import (
+    AttendeeViewSet,
+    AttendeeJoinViewSet,
+)
+
+from recognition.views import (
+    DetectedFaceViewSet,
+)
+
+from interactions.views import (
+    InteractionViewSet,
+)
+
+# Create DRF router
 router = DefaultRouter()
 
-# Event management routes
-router.register(r'events', EventViewSet, basename='event')
+# =====================================
+# Event Routes
+# =====================================
 
-# Attendee management routes  
-router.register(r'attendees', AttendeeViewSet, basename='attendee')
+router.register(
+    r'events',
+    EventViewSet,
+    basename='event'
+)
 
-# Recognition (face detection) routes
-router.register(r'detected-faces', DetectedFaceViewSet, basename='detected-face')
+# =====================================
+# Attendee Routes
+# =====================================
 
-# Interaction (connection) routes
-router.register(r'interactions', InteractionViewSet, basename='interaction')
+router.register(
+    r'attendees',
+    AttendeeViewSet,
+    basename='attendee'
+)
+
+# IMPORTANT
+# This enables:
+# POST /api/events/join/
+router.register(
+    r'events',
+    AttendeeJoinViewSet,
+    basename='event-join'
+)
+
+# =====================================
+# Recognition Routes
+# =====================================
+
+router.register(
+    r'detected-faces',
+    DetectedFaceViewSet,
+    basename='detected-face'
+)
+
+# =====================================
+# Interaction Routes
+# =====================================
+
+router.register(
+    r'interactions',
+    InteractionViewSet,
+    basename='interaction'
+)
+
+# =====================================
+# URL Patterns
+# =====================================
 
 urlpatterns = [
-    # DRF API endpoints
-    path('api/', include(router.urls)),
-    
-    # Django admin
-    path('admin/', admin.site.urls),
-    
-    # DRF authentication endpoints (login/logout)
-    path('api-auth/', include('rest_framework.urls')),
+
+    # DRF API
+    path(
+        'api/',
+        include(router.urls)
+    ),
+
+    # Django Admin
+    path(
+        'admin/',
+        admin.site.urls
+    ),
+
+    # DRF Login/Logout
+    path(
+        'api-auth/',
+        include('rest_framework.urls')
+    ),
 ]
 
-# Serve media files in development
-# In production, use a static file server (Nginx, S3, CloudFront)
+# =====================================
+# Static & Media
+# =====================================
+
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
+
+    urlpatterns += static(
+        settings.STATIC_URL,
+        document_root=settings.STATIC_ROOT
+    )

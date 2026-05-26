@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']  # Update for production
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'rest_framework',
     'pgvector.django',
     'events',
@@ -48,6 +49,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +62,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'conference_ai.urls'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
+
+CORS_ALLOW_ALL_HEADERS = True
 
 TEMPLATES = [
     {
