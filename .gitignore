@@ -15,6 +15,7 @@ staticfiles/
 *.sqlite3
 *.db
 
+dummy_data_creation.py
 
 # Python
 __pycache__/
@@ -23,4 +24,4 @@ __pycache__/
 venv/
 .venv/
 
-frontend/
+frontend/dummy_data_creation.py
