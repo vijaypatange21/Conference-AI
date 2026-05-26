@@ -13,6 +13,10 @@ from attendees.serializers import (
 )
 
 
+# =====================================================
+# JOIN EVENT
+# =====================================================
+
 class AttendeeJoinViewSet(viewsets.ViewSet):
 
     permission_classes = [AllowAny]
@@ -43,35 +47,35 @@ class AttendeeJoinViewSet(viewsets.ViewSet):
         )
 
 
+# =====================================================
+# ATTENDEE CRUD
+# =====================================================
+
 class AttendeeViewSet(viewsets.ModelViewSet):
 
     queryset = (
         Attendee.objects
         .select_related('user', 'event')
+        .all()
     )
 
     serializer_class = AttendeeDetailSerializer
     permission_classes = [AllowAny]
 
     # =====================================
-    # TEMP DUMMY DATA
+    # GET /api/attendees/
     # =====================================
 
-    dummy_data = {
-        "id": 1,
-        "first_name": "Vijay",
-        "last_name": "Patange",
-        "email": "vijay@example.com",
-        "location": "San Francisco, CA",
-        "role": "Senior AI Engineer",
-        "website": "https://conferenceai.com",
-        "event": {
-            "id": 1,
-            "name": "AI Summit 2026"
-        },
-        "selfie": "http://127.0.0.1:8000/media/selfies/selfie.jpeg",
-        "created_at": "2026-05-26T10:00:00Z"
-    }
+    def list(self, request):
+
+        attendees = self.get_queryset()
+
+        serializer = self.get_serializer(
+            attendees,
+            many=True
+        )
+
+        return Response(serializer.data)
 
     # =====================================
     # GET /api/attendees/{id}/
@@ -79,10 +83,13 @@ class AttendeeViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
 
-        return Response(
-            self.dummy_data,
-            status=status.HTTP_200_OK
+        attendee = self.get_object()
+
+        serializer = self.get_serializer(
+            attendee
         )
+
+        return Response(serializer.data)
 
     # =====================================
     # PATCH /api/attendees/{id}/update_selfie/
@@ -91,7 +98,30 @@ class AttendeeViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['patch'])
     def update_selfie(self, request, pk=None):
 
+        attendee = self.get_object()
+
+        serializer = (
+            AttendeeSelfieUploadSerializer(
+                attendee,
+                data=request.data,
+                partial=True
+            )
+        )
+
+        if serializer.is_valid():
+
+            serializer.save()
+
+            response_serializer = (
+                AttendeeDetailSerializer(attendee)
+            )
+
+            return Response(
+                response_serializer.data,
+                status=status.HTTP_200_OK
+            )
+
         return Response(
-            self.dummy_data,
-            status=status.HTTP_200_OK
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
         )
