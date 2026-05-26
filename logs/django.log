@@ -482,3 +482,493 @@ WARNING 2026-02-17 17:53:30,255 log 15496 139861276112576 Not Found: /api/intera
 WARNING 2026-02-17 17:53:30,256 log 15496 139861276112576 "GET /api/interactions/my-connections/?attendee_id=4&event_id=2 HTTP/1.1" 404 23
 WARNING 2026-02-17 17:53:34,193 log 15496 139861276112576 Not Found: /api/interactions/my-connections/
 WARNING 2026-02-17 17:53:34,194 log 15496 139861276112576 "GET /api/interactions/my-connections/?attendee_id=2&event_id=2 HTTP/1.1" 404 23
+INFO 2026-02-23 09:47:30,568 autoreload 22872 127853577077056 Watching for file changes with StatReloader
+INFO 2026-02-23 09:48:44,242 autoreload 22872 127853577077056 /media/vijaipatange/New Volume/conference_ai/conference_ai/settings.py changed, reloading.
+INFO 2026-02-23 09:48:46,364 autoreload 22999 138296864338240 Watching for file changes with StatReloader
+INFO 2026-02-23 09:49:47,193 log 22999 138295575414464 "POST /api/events/ HTTP/1.1" 201 112
+ERROR 2026-02-23 09:52:52,747 log 22999 138295564924608 Internal Server Error: /api/events/join/
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(john2@example.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/events/views.py", line 127, in join
+    attendee = serializer.save()
+               ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/attendees/serializers.py", line 63, in create
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(**kwargs)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 874, in save
+    self.save_base(
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 966, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1220, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(john2@example.com) already exists.
+
+ERROR 2026-02-23 09:52:52,751 log 22999 138295564924608 "POST /api/events/join/ HTTP/1.1" 500 207780
+INFO 2026-02-23 09:53:12,835 signals 22999 138295564924608 Generating embedding for attendee vijay@example.com
+INFO 2026-02-23 09:53:15,200 services 22999 138295564924608 InsightFace model loaded successfully
+INFO 2026-02-23 09:53:16,032 services 22999 138295564924608 Generated embedding for /media/vijaipatange/New Volume/conference_ai/media/selfies/selfie.jpeg
+INFO 2026-02-23 09:53:16,035 signals 22999 138295564924608 Embedding saved for attendee vijay@example.com
+INFO 2026-02-23 09:53:16,037 log 22999 138295564924608 "POST /api/events/join/ HTTP/1.1" 201 232
+ERROR 2026-02-23 09:53:40,293 log 22999 138295564924608 Internal Server Error: /api/events/join/
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(vijay@example.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/events/views.py", line 127, in join
+    attendee = serializer.save()
+               ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/attendees/serializers.py", line 63, in create
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(**kwargs)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 874, in save
+    self.save_base(
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 966, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1220, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(vijay@example.com) already exists.
+
+ERROR 2026-02-23 09:53:40,295 log 22999 138295564924608 "POST /api/events/join/ HTTP/1.1" 500 207842
+ERROR 2026-02-23 09:53:45,402 log 22999 138295564924608 Internal Server Error: /api/events/join/
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(vijay@example.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/core/handlers/base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/events/views.py", line 127, in join
+    attendee = serializer.save()
+               ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/rest_framework/serializers.py", line 210, in save
+    self.instance = self.create(validated_data)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/attendees/serializers.py", line 63, in create
+    user = User.objects.create_user(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 175, in create_user
+    return self._create_user(username, email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/models.py", line 163, in _create_user
+    user.save(using=self._db)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/contrib/auth/base_user.py", line 62, in save
+    super().save(**kwargs)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 874, in save
+    self.save_base(
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 966, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/base.py", line 1220, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/query.py", line 1918, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/models/sql/compiler.py", line 1925, in execute_sql
+    cursor.execute(sql, params)
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/utils.py", line 94, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/media/vijaipatange/New Volume/conference_ai/venv/lib/python3.12/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "auth_user_username_key"
+DETAIL:  Key (username)=(vijay@example.com) already exists.
+
+ERROR 2026-02-23 09:53:45,404 log 22999 138295564924608 "POST /api/events/join/ HTTP/1.1" 500 207842
+INFO 2026-02-23 09:54:34,304 autoreload 23824 125687165714752 Watching for file changes with StatReloader
+INFO 2026-02-23 09:55:32,284 signals 23824 125685876934336 Generating embedding for attendee vijay1@example.com
+INFO 2026-02-23 09:55:33,650 services 23824 125685876934336 InsightFace model loaded successfully
+INFO 2026-02-23 09:55:34,390 services 23824 125685876934336 Generated embedding for /media/vijaipatange/New Volume/conference_ai/media/selfies/selfie_h6WqWS4.jpeg
+INFO 2026-02-23 09:55:34,435 signals 23824 125685876934336 Embedding saved for attendee vijay1@example.com
+INFO 2026-02-23 09:55:34,437 log 23824 125685876934336 "POST /api/events/join/ HTTP/1.1" 201 228
+INFO 2026-02-23 09:56:19,331 log 23824 125685586294464 "GET /api/attendees/1/ HTTP/1.1" 200 278
+WARNING 2026-02-23 09:56:19,761 log 23824 125685586294464 Not Found: /favicon.ico
+WARNING 2026-02-23 09:56:19,761 log 23824 125685586294464 "GET /favicon.ico HTTP/1.1" 404 2853
+INFO 2026-02-23 09:56:26,343 log 23824 125685586294464 "GET /api/attendees/4/ HTTP/1.1" 200 253
+INFO 2026-02-23 09:57:49,116 signals 23824 125685586294464 Queueing async processing for EventImage 2 (event=4)
+INFO 2026-02-23 09:57:49,840 tasks 23185 138540512465024 Starting complete processing for EventImage 2
+INFO 2026-02-23 09:57:49,841 face_processor 23185 138540512465024 Processing event image 2 from event 4
+INFO 2026-02-23 09:57:49,864 log 23824 125685586294464 "POST /api/events/4/upload_image/ HTTP/1.1" 201 163
+INFO 2026-02-23 09:57:51,241 services 23185 138540512465024 InsightFace model loaded successfully
+INFO 2026-02-23 09:57:53,015 services 23185 138540512465024 Detected 6 faces in /media/vijaipatange/New Volume/conference_ai/media/event_images/group_photo1.jpeg
+DEBUG 2026-02-23 09:57:53,020 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.7296
+INFO 2026-02-23 09:57:53,020 face_processor 23185 138540512465024 Face matched to attendee vijay1@example.com (similarity: 0.7296)
+DEBUG 2026-02-23 09:57:53,068 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0797
+INFO 2026-02-23 09:57:53,068 face_processor 23185 138540512465024 No match found (best similarity: 0.0797 < 0.6)
+DEBUG 2026-02-23 09:57:53,072 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0421
+INFO 2026-02-23 09:57:53,073 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 09:57:53,077 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0217
+INFO 2026-02-23 09:57:53,077 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 09:57:53,081 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0305
+INFO 2026-02-23 09:57:53,081 face_processor 23185 138540512465024 No match found (best similarity: 0.0305 < 0.6)
+DEBUG 2026-02-23 09:57:53,092 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0472
+INFO 2026-02-23 09:57:53,092 face_processor 23185 138540512465024 No match found (best similarity: 0.0472 < 0.6)
+INFO 2026-02-23 09:57:53,094 face_processor 23185 138540512465024 Created 6 DetectedFace records from 6 faces in event image 2
+INFO 2026-02-23 09:57:53,094 tasks 23185 138540512465024 Detected 6 faces
+DEBUG 2026-02-23 09:57:53,098 services 23185 138540512465024 Fewer than 2 matched attendees in image 2, no interactions to process
+INFO 2026-02-23 09:57:53,098 tasks 23185 138540512465024 Created 0 interaction pairs
+INFO 2026-02-23 09:57:53,098 tasks 23185 138540512465024 Completed full processing for EventImage 2
+INFO 2026-02-23 09:58:20,056 signals 23824 125685586294464 Queueing async processing for EventImage 3 (event=4)
+INFO 2026-02-23 09:58:20,066 log 23824 125685586294464 "POST /api/events/4/upload_image/ HTTP/1.1" 201 162
+INFO 2026-02-23 09:58:20,087 tasks 23185 138540512465024 Starting complete processing for EventImage 3
+INFO 2026-02-23 09:58:20,089 face_processor 23185 138540512465024 Processing event image 3 from event 4
+INFO 2026-02-23 09:58:22,158 services 23185 138540512465024 Detected 6 faces in /media/vijaipatange/New Volume/conference_ai/media/event_images/group_photo.jpeg
+DEBUG 2026-02-23 09:58:22,168 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0568
+INFO 2026-02-23 09:58:22,170 face_processor 23185 138540512465024 No match found (best similarity: 0.0568 < 0.6)
+DEBUG 2026-02-23 09:58:22,187 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.7038
+INFO 2026-02-23 09:58:22,189 face_processor 23185 138540512465024 Face matched to attendee vijay1@example.com (similarity: 0.7038)
+DEBUG 2026-02-23 09:58:22,198 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0011
+INFO 2026-02-23 09:58:22,198 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 09:58:22,208 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0376
+INFO 2026-02-23 09:58:22,208 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 09:58:22,218 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0801
+INFO 2026-02-23 09:58:22,219 face_processor 23185 138540512465024 No match found (best similarity: 0.0801 < 0.6)
+DEBUG 2026-02-23 09:58:22,230 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0245
+INFO 2026-02-23 09:58:22,230 face_processor 23185 138540512465024 No match found (best similarity: 0.0245 < 0.6)
+INFO 2026-02-23 09:58:22,233 face_processor 23185 138540512465024 Created 6 DetectedFace records from 6 faces in event image 3
+INFO 2026-02-23 09:58:22,234 tasks 23185 138540512465024 Detected 6 faces
+DEBUG 2026-02-23 09:58:22,239 services 23185 138540512465024 Fewer than 2 matched attendees in image 3, no interactions to process
+INFO 2026-02-23 09:58:22,240 tasks 23185 138540512465024 Created 0 interaction pairs
+INFO 2026-02-23 09:58:22,240 tasks 23185 138540512465024 Completed full processing for EventImage 3
+INFO 2026-02-23 10:00:28,314 signals 23824 125685472425664 Queueing async processing for EventImage 4 (event=4)
+INFO 2026-02-23 10:00:28,333 log 23824 125685472425664 "POST /api/events/4/upload_image/ HTTP/1.1" 201 153
+INFO 2026-02-23 10:00:28,351 tasks 23185 138540512465024 Starting complete processing for EventImage 4
+INFO 2026-02-23 10:00:28,353 face_processor 23185 138540512465024 Processing event image 4 from event 4
+INFO 2026-02-23 10:00:30,347 services 23185 138540512465024 Detected 6 faces in /media/vijaipatange/New Volume/conference_ai/media/event_images/ggp.jpg
+DEBUG 2026-02-23 10:00:30,353 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0560
+INFO 2026-02-23 10:00:30,353 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:00:30,402 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0028
+INFO 2026-02-23 10:00:30,403 face_processor 23185 138540512465024 No match found (best similarity: 0.0028 < 0.6)
+DEBUG 2026-02-23 10:00:30,411 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0572
+INFO 2026-02-23 10:00:30,411 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:00:30,418 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0205
+INFO 2026-02-23 10:00:30,418 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:00:30,427 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0715
+INFO 2026-02-23 10:00:30,427 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:00:30,433 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0314
+INFO 2026-02-23 10:00:30,434 face_processor 23185 138540512465024 No attendees to compare against
+INFO 2026-02-23 10:00:30,436 face_processor 23185 138540512465024 Created 6 DetectedFace records from 6 faces in event image 4
+INFO 2026-02-23 10:00:30,436 tasks 23185 138540512465024 Detected 6 faces
+DEBUG 2026-02-23 10:00:30,439 services 23185 138540512465024 Fewer than 2 matched attendees in image 4, no interactions to process
+INFO 2026-02-23 10:00:30,439 tasks 23185 138540512465024 Created 0 interaction pairs
+INFO 2026-02-23 10:00:30,439 tasks 23185 138540512465024 Completed full processing for EventImage 4
+INFO 2026-02-23 10:08:08,117 signals 23824 125685464032960 Queueing async processing for EventImage 5 (event=4)
+INFO 2026-02-23 10:08:08,136 log 23824 125685464032960 "POST /api/events/4/upload_image/ HTTP/1.1" 201 161
+INFO 2026-02-23 10:08:08,153 tasks 23185 138540512465024 Starting complete processing for EventImage 5
+INFO 2026-02-23 10:08:08,155 face_processor 23185 138540512465024 Processing event image 5 from event 4
+INFO 2026-02-23 10:08:10,169 services 23185 138540512465024 Detected 6 faces in /media/vijaipatange/New Volume/conference_ai/media/event_images/ggp_eM5wwwK.jpg
+DEBUG 2026-02-23 10:08:10,172 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0560
+INFO 2026-02-23 10:08:10,173 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:08:10,219 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: 0.0028
+INFO 2026-02-23 10:08:10,219 face_processor 23185 138540512465024 No match found (best similarity: 0.0028 < 0.6)
+DEBUG 2026-02-23 10:08:10,223 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0572
+INFO 2026-02-23 10:08:10,223 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:08:10,227 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0205
+INFO 2026-02-23 10:08:10,227 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:08:10,231 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0715
+INFO 2026-02-23 10:08:10,231 face_processor 23185 138540512465024 No attendees to compare against
+DEBUG 2026-02-23 10:08:10,235 face_processor 23185 138540512465024 Similarity between detected face and attendee vijay1@example.com: -0.0314
+INFO 2026-02-23 10:08:10,236 face_processor 23185 138540512465024 No attendees to compare against
+INFO 2026-02-23 10:08:10,242 face_processor 23185 138540512465024 Created 6 DetectedFace records from 6 faces in event image 5
+INFO 2026-02-23 10:08:10,242 tasks 23185 138540512465024 Detected 6 faces
+DEBUG 2026-02-23 10:08:10,244 services 23185 138540512465024 Fewer than 2 matched attendees in image 5, no interactions to process
+INFO 2026-02-23 10:08:10,244 tasks 23185 138540512465024 Created 0 interaction pairs
+INFO 2026-02-23 10:08:10,244 tasks 23185 138540512465024 Completed full processing for EventImage 5
+INFO 2026-02-23 10:10:46,049 autoreload 23824 125687165714752 /media/vijaipatange/New Volume/conference_ai/recognition/serializers.py changed, reloading.
+INFO 2026-02-23 10:10:48,455 autoreload 25882 123574266351936 Watching for file changes with StatReloader
+INFO 2026-02-23 10:11:15,647 log 25882 123572975929024 "GET /api/events/4/images/ HTTP/1.1" 200 244424
+INFO 2026-02-23 10:12:07,680 autoreload 25882 123574266351936 /media/vijaipatange/New Volume/conference_ai/recognition/serializers.py changed, reloading.
+INFO 2026-02-23 10:12:10,219 autoreload 25985 125025030181184 Watching for file changes with StatReloader
+INFO 2026-02-23 10:12:17,159 signals 25985 125023741167296 Queueing async processing for EventImage 6 (event=4)
+INFO 2026-02-23 10:12:17,247 log 25985 125023741167296 "POST /api/events/4/upload_image/ HTTP/1.1" 201 273
+INFO 2026-02-23 10:12:17,275 tasks 25788 133192870690944 Starting complete processing for EventImage 6
+INFO 2026-02-23 10:12:17,277 face_processor 25788 133192870690944 Processing event image 6 from event 4
+INFO 2026-02-23 10:12:18,626 services 25788 133192870690944 InsightFace model loaded successfully
+INFO 2026-02-23 10:12:20,410 services 25788 133192870690944 Detected 6 faces in /media/vijaipatange/New Volume/conference_ai/media/event_images/ggp_xqZ9y2D.jpg
+DEBUG 2026-02-23 10:12:20,415 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: -0.0560
+INFO 2026-02-23 10:12:20,415 face_processor 25788 133192870690944 No attendees to compare against
+DEBUG 2026-02-23 10:12:20,463 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: 0.0028
+INFO 2026-02-23 10:12:20,463 face_processor 25788 133192870690944 No match found (best similarity: 0.0028 < 0.6)
+DEBUG 2026-02-23 10:12:20,468 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: -0.0572
+INFO 2026-02-23 10:12:20,468 face_processor 25788 133192870690944 No attendees to compare against
+DEBUG 2026-02-23 10:12:20,472 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: -0.0205
+INFO 2026-02-23 10:12:20,472 face_processor 25788 133192870690944 No attendees to compare against
+DEBUG 2026-02-23 10:12:20,476 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: -0.0715
+INFO 2026-02-23 10:12:20,476 face_processor 25788 133192870690944 No attendees to compare against
+DEBUG 2026-02-23 10:12:20,480 face_processor 25788 133192870690944 Similarity between detected face and attendee vijay1@example.com: -0.0314
+INFO 2026-02-23 10:12:20,480 face_processor 25788 133192870690944 No attendees to compare against
+INFO 2026-02-23 10:12:20,485 face_processor 25788 133192870690944 Created 6 DetectedFace records from 6 faces in event image 6
+INFO 2026-02-23 10:12:20,485 tasks 25788 133192870690944 Detected 6 faces
+DEBUG 2026-02-23 10:12:20,488 services 25788 133192870690944 Fewer than 2 matched attendees in image 6, no interactions to process
+INFO 2026-02-23 10:12:20,488 tasks 25788 133192870690944 Created 0 interaction pairs
+INFO 2026-02-23 10:12:20,488 tasks 25788 133192870690944 Completed full processing for EventImage 6
+WARNING 2026-02-23 10:13:18,410 log 25985 125023719007936 Not Found: /api/events/detected-faces/4/
+WARNING 2026-02-23 10:13:18,410 log 25985 125023719007936 "GET /api/events/detected-faces/4/ HTTP/1.1" 404 13091
+INFO 2026-02-23 10:13:33,261 log 25985 125023719007936 "GET /api/detected-faces/4/ HTTP/1.1" 200 10379
+INFO 2026-02-23 10:13:52,553 log 25985 125023719007936 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+WARNING 2026-02-23 10:15:49,834 log 25985 125023710615232 Not Found: /api/interactions/top-combinations/
+WARNING 2026-02-23 10:15:49,834 log 25985 125023710615232 "GET /api/interactions/top-combinations/?event_id=4&limit=10 HTTP/1.1" 404 23
+WARNING 2026-02-23 10:23:09,619 log 25985 125023702222528 Not Found: /api/interactions/top-combinations/
+WARNING 2026-02-23 10:23:09,620 log 25985 125023702222528 "GET /api/interactions/top-combinations/?event_id=4&limit=10 HTTP/1.1" 404 23
+WARNING 2026-02-23 10:23:46,773 log 25985 125023702222528 Not Found: /api/interactions/my-connections/
+WARNING 2026-02-23 10:23:46,773 log 25985 125023702222528 "GET /api/interactions/my-connections/?attendee_id=6&event_id=4 HTTP/1.1" 404 23
+INFO 2026-02-23 10:24:24,717 autoreload 25985 125025030181184 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:24:27,103 autoreload 26807 128483306340672 Watching for file changes with StatReloader
+INFO 2026-02-23 10:24:29,596 autoreload 26807 128483306340672 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:24:32,251 autoreload 26839 135462188044608 Watching for file changes with StatReloader
+INFO 2026-02-23 10:24:37,804 autoreload 26839 135462188044608 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:24:40,176 autoreload 26893 124915463700800 Watching for file changes with StatReloader
+INFO 2026-02-23 10:24:51,829 autoreload 26893 124915463700800 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:24:54,019 autoreload 26947 136650429428032 Watching for file changes with StatReloader
+WARNING 2026-02-23 10:24:59,587 log 26947 136649139570368 Not Found: /api/interactions/my-connections/
+WARNING 2026-02-23 10:24:59,587 log 26947 136649139570368 "GET /api/interactions/my-connections/?attendee_id=6&event_id=4 HTTP/1.1" 404 23
+WARNING 2026-02-23 10:25:19,623 log 26947 136649139570368 Not Found: /api/interactions/top-combinations/
+WARNING 2026-02-23 10:25:19,623 log 26947 136649139570368 "GET /api/interactions/top-combinations/?event_id=4&limit=10 HTTP/1.1" 404 23
+INFO 2026-02-23 10:25:37,510 log 26947 136649129080512 "GET /api/interactions/ HTTP/1.1" 200 272
+WARNING 2026-02-23 10:25:46,938 log 26947 136649129080512 Not Found: /api/interactions/top-combinations/
+WARNING 2026-02-23 10:25:46,938 log 26947 136649129080512 "GET /api/interactions/top-combinations/?event_id=4 HTTP/1.1" 404 23
+INFO 2026-02-23 10:26:04,417 log 26947 136649129080512 "GET /api/interactions/top_combinations/?event_id=4 HTTP/1.1" 200 222
+INFO 2026-02-23 10:26:25,406 autoreload 26947 136650429428032 /media/vijaipatange/New Volume/conference_ai/conference_ai/urls.py changed, reloading.
+INFO 2026-02-23 10:26:27,590 autoreload 27271 130728287199552 Watching for file changes with StatReloader
+INFO 2026-02-23 10:26:35,027 autoreload 27271 130728287199552 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:26:37,265 autoreload 27329 136614107300160 Watching for file changes with StatReloader
+INFO 2026-02-23 10:26:39,725 autoreload 27329 136614107300160 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:26:42,371 autoreload 27361 123474984292672 Watching for file changes with StatReloader
+INFO 2026-02-23 10:26:47,854 autoreload 27361 123474984292672 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:26:50,395 autoreload 27411 134402138739008 Watching for file changes with StatReloader
+INFO 2026-02-23 10:26:53,882 autoreload 27411 134402138739008 /media/vijaipatange/New Volume/conference_ai/interactions/views.py changed, reloading.
+INFO 2026-02-23 10:26:56,170 autoreload 27443 138291964596544 Watching for file changes with StatReloader
+INFO 2026-02-23 10:27:00,792 autoreload 27443 138291964596544 /media/vijaipatange/New Volume/conference_ai/conference_ai/urls.py changed, reloading.
+INFO 2026-02-23 10:27:02,772 autoreload 27478 136757604094272 Watching for file changes with StatReloader
+INFO 2026-02-23 10:27:05,317 log 27478 136756314654400 "GET /api/interactions/top_combinations/?event_id=4&limit=10 HTTP/1.1" 200 222
+INFO 2026-04-27 18:14:06,508 autoreload 87571 130007836913984 Watching for file changes with StatReloader
+INFO 2026-04-27 18:14:21,469 basehttp 87571 130007062013632 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-27 18:14:21,522 basehttp 87571 130006982325952 "GET /api/attendees/ HTTP/1.1" 200 1995
+WARNING 2026-04-27 18:20:01,184 log 87571 130006982325952 Bad Request: /api/events/join/
+WARNING 2026-04-27 18:20:01,184 basehttp 87571 130006982325952 "POST /api/events/join/ HTTP/1.1" 400 47
+INFO 2026-04-27 18:20:10,700 basehttp 87571 130006982325952 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-27 18:20:10,707 basehttp 87571 130007062013632 "GET /api/attendees/ HTTP/1.1" 200 1995
+WARNING 2026-04-27 18:20:23,797 log 87571 130007062013632 Bad Request: /api/events/join/
+WARNING 2026-04-27 18:20:23,797 basehttp 87571 130007062013632 "POST /api/events/join/ HTTP/1.1" 400 47
+INFO 2026-04-27 18:20:36,993 basehttp 87571 130007062013632 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-27 18:20:36,999 basehttp 87571 130006982325952 "GET /api/attendees/ HTTP/1.1" 200 1995
+INFO 2026-04-27 18:21:19,926 signals 87571 130006982325952 Generating embedding for attendee asdf@asaf.com
+INFO 2026-04-27 18:21:37,763 services 87571 130006982325952 InsightFace model loaded successfully
+INFO 2026-04-27 18:21:39,910 services 87571 130006982325952 Generated embedding for /mnt/projects/conference_ai/media/selfies/ggp.jpg
+INFO 2026-04-27 18:21:39,956 signals 87571 130006982325952 Embedding saved for attendee asdf@asaf.com
+INFO 2026-04-27 18:21:39,957 basehttp 87571 130006982325952 "POST /api/events/join/ HTTP/1.1" 201 206
+WARNING 2026-04-27 18:21:41,962 log 87571 130006982325952 Not Found: /api/attendees/12/
+WARNING 2026-04-27 18:21:41,963 basehttp 87571 130006982325952 "GET /api/attendees/12/ HTTP/1.1" 404 23
+WARNING 2026-04-27 18:21:47,349 log 87571 130006982325952 Not Found: /api/attendees/12/
+WARNING 2026-04-27 18:21:47,350 basehttp 87571 130006982325952 "GET /api/attendees/12/ HTTP/1.1" 404 23
+INFO 2026-04-28 13:07:00,145 autoreload 124117 127770397339968 Watching for file changes with StatReloader
+INFO 2026-04-28 13:07:08,241 basehttp 124117 127769623127744 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:07:08,271 basehttp 124117 127769614735040 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:07:08,304 basehttp 124117 127769623127744 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:07:08,309 basehttp 124117 127769606342336 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:07:08,318 basehttp 124117 127769614735040 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:07:08,403 basehttp 124117 127769614735040 "GET /api/events/4/ HTTP/1.1" 200 131
+INFO 2026-04-28 13:07:08,459 basehttp 124117 127769597949632 "GET /api/interactions/top_combinations/?event_id=4&limit=10 HTTP/1.1" 200 222
+INFO 2026-04-28 13:07:08,472 basehttp 124117 127769606342336 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:07:08,516 basehttp 124117 127769623127744 "GET /api/events/4/images/ HTTP/1.1" 200 305285
+INFO 2026-04-28 13:07:10,667 basehttp 124117 127769606342336 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:07:10,675 basehttp 124117 127769623127744 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:07:10,735 basehttp 124117 127769597949632 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:07:10,735 basehttp 124117 127769606342336 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:07:10,743 basehttp 124117 127769623127744 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:07:10,816 basehttp 124117 127769623127744 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:07:10,891 basehttp 124117 127769623127744 "GET /api/events/4/ HTTP/1.1" 200 131
+INFO 2026-04-28 13:07:10,910 basehttp 124117 127769597949632 "GET /api/interactions/top_combinations/?event_id=4&limit=10 HTTP/1.1" 200 222
+INFO 2026-04-28 13:07:10,979 basehttp 124117 127769606342336 "GET /api/events/4/images/ HTTP/1.1" 200 305285
+INFO 2026-04-28 13:08:29,422 basehttp 124117 127769606342336 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:08:29,429 basehttp 124117 127769597949632 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:08:29,470 basehttp 124117 127769623127744 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:08:29,476 basehttp 124117 127769606342336 "GET /api/events/ HTTP/1.1" 200 538
+INFO 2026-04-28 13:08:29,482 basehttp 124117 127769597949632 "GET /api/attendees/ HTTP/1.1" 200 2223
+INFO 2026-04-28 13:08:29,535 basehttp 124117 127769597949632 "GET /api/events/4/ HTTP/1.1" 200 131
+INFO 2026-04-28 13:08:29,570 basehttp 124117 127769623127744 "GET /api/interactions/top_combinations/?event_id=4&limit=10 HTTP/1.1" 200 222
+INFO 2026-04-28 13:08:29,593 basehttp 124117 127769614735040 "GET /api/detected-faces/stats/ HTTP/1.1" 200 449
+INFO 2026-04-28 13:08:29,655 basehttp 124117 127769606342336 "GET /api/events/4/images/ HTTP/1.1" 200 305285

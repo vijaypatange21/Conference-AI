@@ -19,8 +19,8 @@ API Routes:
 -
 - /api/interactions/     GET
 - /api/interactions/{id}/ GET
-- /api/interactions/my-connections/  GET
-- /api/interactions/top-combinations/ GET
+- /api/interactions/my_connections/  GET
+- /api/interactions/top_combinations/ GET
 
 Media:
 - /media/               Uploaded selfies and event images

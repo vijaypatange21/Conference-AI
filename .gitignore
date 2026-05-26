@@ -1,1 +1,26 @@
-venv
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Media files (don't commit user uploads)
+media/
+staticfiles/
+
+# Database
+*.sqlite3
+*.db
+
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+frontend/

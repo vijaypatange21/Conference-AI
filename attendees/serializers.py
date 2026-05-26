@@ -24,6 +24,8 @@ class AttendeeJoinSerializer(serializers.Serializer):
     Accepts:
     - event_code: UUID code of event to join
     - selfie: Image file
+    - username: attendee login username
+    - password: attendee login password
     - first_name, last_name: User info
     - email: User email
     
@@ -32,6 +34,8 @@ class AttendeeJoinSerializer(serializers.Serializer):
     
     event_code = serializers.CharField(required=True)
     selfie = serializers.ImageField(required=True)
+    username = serializers.CharField(max_length=150, required=True)
+    password = serializers.CharField(write_only=True, min_length=8, required=True)
     first_name = serializers.CharField(max_length=150, required=False)
     last_name = serializers.CharField(max_length=150, required=False)
     email = serializers.EmailField(required=False)
@@ -52,16 +56,15 @@ class AttendeeJoinSerializer(serializers.Serializer):
         # Extract data
         event_code = validated_data.pop('event_code')
         selfie = validated_data.pop('selfie')
+        username = validated_data.pop('username')
+        password = validated_data.pop('password')
         first_name = validated_data.pop('first_name', '')
         last_name = validated_data.pop('last_name', '')
         email = validated_data.pop('email', '')
-        
-        # Create user (username = email or UUID)
-        import uuid
-        username = email or f"attendee_{uuid.uuid4().hex[:8]}"
-        
+
         user = User.objects.create_user(
             username=username,
+            password=password,
             email=email,
             first_name=first_name,
             last_name=last_name
@@ -89,13 +92,14 @@ class AttendeeDetailSerializer(serializers.ModelSerializer):
     email = serializers.CharField(source='user.email', read_only=True)
     event_id = serializers.IntegerField(read_only=True)
     event_name = serializers.CharField(source='event.name', read_only=True)
+    user_has_password = serializers.SerializerMethodField()
     embedding_ready = serializers.SerializerMethodField()
     
     class Meta:
         model = Attendee
         fields = [
             'id', 'user_id', 'username', 'email',
-            'event_id', 'event_name', 'selfie',
+            'event_id', 'event_name', 'selfie', 'user_has_password',
             'embedding_ready', 'created_at'
         ]
         read_only_fields = ['id', 'created_at']
@@ -103,6 +107,9 @@ class AttendeeDetailSerializer(serializers.ModelSerializer):
     def get_embedding_ready(self, obj):
         """Check if embedding has been generated."""
         return obj.embedding is not None
+
+    def get_user_has_password(self, obj):
+        return bool(obj.user and obj.user.has_usable_password())
 
 
 class AttendeeSelfieUploadSerializer(serializers.Serializer):

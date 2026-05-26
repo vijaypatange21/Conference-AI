@@ -61,10 +61,18 @@ class EventImageUploadSerializer(serializers.ModelSerializer):
             matched_attendee__isnull=False
         ).count()
         
+        is_processing = face_count == 0
+        
         return {
             'total_faces': face_count,
             'matched_faces': matched_count,
-            'processing': face_count == 0  # Still processing if no faces detected
+            'processing': is_processing,
+            'message': (
+                'Image processing started. Poll /events/{}/images to check results'.format(obj.event.id)
+                if is_processing
+                else 'Processing complete'
+            ),
+            'poll_url': '/api/events/{}/images/'.format(obj.event.id)
         }
 
 
