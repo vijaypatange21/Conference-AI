@@ -24,4 +24,3 @@ __pycache__/
 venv/
 .venv/
 
-frontend/dummy_data_creation.py
