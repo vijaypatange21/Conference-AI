@@ -1,10 +1,5 @@
 # AI Conference Networking Finder
 
-<<<<<<< HEAD
-**Production-grade Django + AI pipeline for building automated attendee networking at conferences.**
-
-Detect faces in group photos, match them to attendees using InsightFace embeddings, and build an interaction graph showing who met whom.
-=======
 A dashboard-first conference networking product where each attendee creates a username and password, uploads a selfie, gets matched from group photos, and sees a live discovery panel ranked by interaction score.
 
 ## Product Flow
@@ -136,4 +131,3 @@ The first frontend build should focus on:
 - This repository currently contains the Django backend only.
 - The frontend dashboard can be implemented as a separate web app that consumes these APIs.
 - If a dedicated React frontend is added later, it should use the username-based attendee flow described above.
->>>>>>> 769fcfc (fixed rocognition and interaaction logic)

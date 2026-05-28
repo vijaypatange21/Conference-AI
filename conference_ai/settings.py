@@ -166,7 +166,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',  # Can override per view
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'rest_framework.filters.SearchFilter',

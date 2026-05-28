@@ -6,6 +6,7 @@ psycopg2-binary==2.9.9
 
 # REST Framework
 djangorestframework==3.14.0
+djangorestframework-simplejwt==5.5.1
 
 # Database & Vector Search
 pgvector==0.3.1
