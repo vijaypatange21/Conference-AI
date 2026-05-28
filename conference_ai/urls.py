@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from auth.views import CurrentUserView
 
 # Import ViewSets
 from events.views import EventViewSet
@@ -110,6 +111,11 @@ urlpatterns = [
         'api/auth/refresh/',
         TokenRefreshView.as_view(),
         name='token_refresh',
+    ),
+    path(
+        'api/auth/me/',
+        CurrentUserView.as_view(),
+        name='current_user',
     ),
 ]
 
