@@ -11,7 +11,7 @@ from attendees.serializers import (
     AttendeeDetailSerializer,
     AttendeeSelfieUploadSerializer
 )
-
+import traceback
 
 # =====================================================
 # JOIN EVENT
@@ -100,26 +100,31 @@ class AttendeeViewSet(viewsets.ModelViewSet):
 
         attendee = self.get_object()
 
-        serializer = (
-            AttendeeSelfieUploadSerializer(
-                attendee,
-                data=request.data,
-                partial=True
-            )
+        serializer = AttendeeSelfieUploadSerializer(
+            attendee,
+            data=request.data,
+            partial=True
         )
 
         if serializer.is_valid():
 
-            serializer.save()
+            try:
+                serializer.save()
 
-            response_serializer = (
-                AttendeeDetailSerializer(attendee)
-            )
+                response_serializer = AttendeeDetailSerializer(attendee)
 
-            return Response(
-                response_serializer.data,
-                status=status.HTTP_200_OK
-            )
+                return Response(
+                    response_serializer.data,
+                    status=status.HTTP_200_OK
+                )
+
+            except Exception as e:
+                traceback.print_exc()
+
+                return Response(
+                    {"error": str(e)},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
 
         return Response(
             serializer.errors,

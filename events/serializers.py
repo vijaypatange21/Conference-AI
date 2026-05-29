@@ -20,8 +20,8 @@ class EventCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Event
-        fields = ['id', 'name', 'code', 'created_at']
-        read_only_fields = ['id', 'code', 'created_at']
+        fields = ['id', 'name', 'event_code', 'created_at']
+        read_only_fields = ['id', 'event_code', 'created_at']
     
     def create(self, validated_data):
         """Create event with auto-generated UUID code."""
@@ -39,8 +39,8 @@ class EventDetailSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Event
-        fields = ['id', 'name', 'code', 'created_at', 'attendee_count']
-        read_only_fields = ['id', 'code', 'created_at']
+        fields = ['id', 'name', 'event_code', 'start_date', 'attendee_count']
+        read_only_fields = ['id', 'event_code', 'start_date']
     
     def get_attendee_count(self, obj):
         """Count attendees with embeddings (ready for matching)."""
@@ -59,4 +59,4 @@ class EventListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Event
-        fields = ['id', 'name', 'code', 'created_at']
+        fields = ['id', 'name', 'event_code', 'start_date']

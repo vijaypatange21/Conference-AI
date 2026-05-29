@@ -1,60 +1,76 @@
-"""
-interactions/serializers.py
-
-DRF serializers for Interaction endpoints.
-
-Design:
-- InteractionDetailSerializer: Shows connected attendee info + score
-- Used in GET /interactions/my-connections
-"""
-
 from rest_framework import serializers
 from interactions.models import Interaction
-from attendees.serializers import AttendeeDetailSerializer
 
 
 class InteractionDetailSerializer(serializers.ModelSerializer):
-    """
-    Show interaction score between two attendees.
-    
-    GET /interactions/my-connections returns list of these.
-    """
-    
-    # Use SerializerMethodField to dynamically show the "other" attendee
     connected_attendee = serializers.SerializerMethodField()
-    
+    event_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Interaction
-        fields = ['id', 'event', 'connected_attendee', 'score']
-        read_only_fields = ['id', 'event', 'score']
-    
+        fields = [
+            'id',
+            'event',
+            'event_name',
+            'interaction_score',
+            'connected_attendee',
+        ]
+
+    def get_event_name(self, obj):
+        if obj.event:
+            return obj.event.name
+        return None
+
     def get_connected_attendee(self, obj):
-        """Return the attendee that is NOT the current user."""
         request = self.context.get('request')
-        if not request or not request.user:
+
+        current_attendee = getattr(request, 'current_attendee', None)
+
+        if not current_attendee:
             return None
-        
-        # Determine which attendee is the "other" one
-        current_user_attendee = getattr(request, 'current_attendee', None)
-        if not current_user_attendee:
-            return None
-        
-        if obj.attendee1_id == current_user_attendee.id:
-            other = obj.attendee2
-        else:
-            other = obj.attendee1
-        
-        return AttendeeDetailSerializer(other).data
+
+        other = (
+            obj.attendee2
+            if obj.attendee1_id == current_attendee.id
+            else obj.attendee1
+        )
+
+        return {
+            "id": other.id,
+            "username": other.user.username if other.user else None,
+            "email": other.user.email if other.user else None,
+            "role": getattr(other, 'role', 'Attendee'),
+            "selfie": other.selfie.url if getattr(other, 'selfie', None) else None,
+        }
 
 
 class InteractionListSerializer(serializers.ModelSerializer):
-    """
-    Simple interaction view for listing.
-    """
-    
-    attendee1_username = serializers.CharField(source='attendee1.user.username', read_only=True)
-    attendee2_username = serializers.CharField(source='attendee2.user.username', read_only=True)
-    
+    attendee1_username = serializers.CharField(
+        source='attendee1.user.username',
+        read_only=True
+    )
+
+    attendee2_username = serializers.CharField(
+        source='attendee2.user.username',
+        read_only=True
+    )
+
+    event_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Interaction
-        fields = ['id', 'event', 'attendee1_username', 'attendee2_username', 'score']
+        fields = [
+            'id',
+            'event',
+            'event_name',
+            'interaction_score',
+            'attendee1',
+            'attendee2',
+            'attendee1_username',
+            'attendee2_username',
+        ]
+
+    def get_event_name(self, obj):
+        if obj.event:
+            return obj.event.name
+        return None

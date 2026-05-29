@@ -48,7 +48,7 @@ class EventViewSet(viewsets.ModelViewSet):
     GET    /events/{id}/images -> List event images
     """
     
-    queryset = Event.objects.all().order_by('-created_at')
+    queryset = Event.objects.all().order_by('-start_date')
     permission_classes = [AllowAny]
     
     def get_serializer_class(self):
@@ -100,7 +100,7 @@ class EventViewSet(viewsets.ModelViewSet):
         """
         
         event = self.get_object()
-        images = EventImage.objects.filter(event=event).order_by('-uploaded_at')
+        images = EventImage.objects.filter(event=event).order_by('-start_date')
         
         serializer = EventImageDetailSerializer(images, many=True)
         return Response(serializer.data)

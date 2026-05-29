@@ -47,7 +47,10 @@ def auto_generate_embedding(sender, instance, created, update_fields, **kwargs):
     """
     
     # Skip if no selfie or embedding already exists
-    if not instance.selfie or instance.embedding:
+    if not instance.selfie:
+        return
+
+    if instance.embedding is not None:
         return
     
     # Check if selfie actually changed (if update_fields is provided)

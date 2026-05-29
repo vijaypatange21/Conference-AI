@@ -36,7 +36,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
     
     queryset = Interaction.objects.select_related(
         'attendee1', 'attendee2', 'event'
-    ).order_by('-score')
+    ).order_by('-interaction_score')
     
     permission_classes = [AllowAny]
     
@@ -96,7 +96,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
             interactions = interactions.filter(event_id=event_id)
         
         # Sort by score descending
-        interactions = interactions.order_by('-score')
+        interactions = interactions.order_by('-interaction_score')
         
         # Add context so serializer can access current attendee
         request.current_attendee = attendee
@@ -153,7 +153,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
         if event_id:
             interactions = interactions.filter(event_id=event_id)
 
-        interactions = interactions.order_by('-score', '-id')
+        interactions = interactions.order_by('-interaction_score', '-id')
 
         request.current_attendee = attendee
         serializer = InteractionDetailSerializer(
@@ -198,7 +198,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
             interactions = interactions.filter(event_id=event_id)
         
         # Order by score and limit
-        interactions = interactions.order_by('-score')[:limit]
+        interactions = interactions.order_by('-interaction_score')[:limit]
         
         serializer = InteractionListSerializer(interactions, many=True)
         return Response(serializer.data)
