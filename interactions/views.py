@@ -35,7 +35,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
     """
     
     queryset = Interaction.objects.select_related(
-        'attendee1', 'attendee2', 'event'
+        'attendee1__user', 'attendee2__user', 'event'
     ).order_by('-interaction_score')
     
     permission_classes = [AllowAny]
@@ -80,7 +80,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
             )
         
         try:
-            attendee = Attendee.objects.get(id=attendee_id)
+            attendee = Attendee.objects.select_related('user', 'event').get(id=attendee_id)
         except Attendee.DoesNotExist:
             return Response(
                 {'error': 'Attendee not found'},
@@ -90,7 +90,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
         # Get interactions for this attendee
         interactions = Interaction.objects.filter(
             Q(attendee1=attendee) | Q(attendee2=attendee)
-        ).select_related('attendee1', 'attendee2', 'event')
+        ).select_related('attendee1__user', 'attendee2__user', 'event')
         
         if event_id:
             interactions = interactions.filter(event_id=event_id)
@@ -148,7 +148,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
 
         interactions = Interaction.objects.filter(
             Q(attendee1=attendee) | Q(attendee2=attendee)
-        ).select_related('attendee1', 'attendee2', 'event')
+        ).select_related('attendee1__user', 'attendee2__user', 'event')
 
         if event_id:
             interactions = interactions.filter(event_id=event_id)
@@ -191,7 +191,7 @@ class InteractionViewSet(viewsets.ModelViewSet):
         limit = int(request.query_params.get('limit', 10))
         limit = min(limit, 100)  # Cap at 100
         
-        interactions = Interaction.objects.select_related('attendee1', 'attendee2', 'event')
+        interactions = Interaction.objects.select_related('attendee1__user', 'attendee2__user', 'event')
         
         event_id = request.query_params.get('event_id')
         if event_id:

@@ -43,7 +43,7 @@ class AttendeeJoinSerializer(serializers.Serializer):
     def validate_event_code(self, value):
         """Verify event exists."""
         try:
-            Event.objects.get(code=value)
+            Event.objects.get(event_code=value)
         except Event.DoesNotExist:
             raise serializers.ValidationError("Event not found")
         return value
@@ -71,7 +71,7 @@ class AttendeeJoinSerializer(serializers.Serializer):
         )
         
         # Create attendee with selfie
-        event = Event.objects.get(code=event_code)
+        event = Event.objects.get(event_code=event_code)
         attendee = Attendee.objects.create(
             user=user,
             event=event,
@@ -90,7 +90,7 @@ class AttendeeDetailSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(source='user.id', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
     email = serializers.CharField(source='user.email', read_only=True)
-    event_id = serializers.IntegerField(read_only=True)
+    event_id = serializers.IntegerField(source='event.id', read_only=True)
     event_name = serializers.CharField(source='event.name', read_only=True)
     user_has_password = serializers.SerializerMethodField()
     embedding_ready = serializers.SerializerMethodField()

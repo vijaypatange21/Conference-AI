@@ -67,6 +67,8 @@ ROOT_URLCONF = 'conference_ai.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:3000",
+
 ]
 
 CORS_ALLOW_ALL_HEADERS = True

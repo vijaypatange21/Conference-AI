@@ -20,8 +20,8 @@ class EventCreateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Event
-        fields = ['id', 'name', 'event_code', 'created_at']
-        read_only_fields = ['id', 'event_code', 'created_at']
+        fields = ['id', 'name', 'event_code']
+        read_only_fields = ['id', 'event_code']
     
     def create(self, validated_data):
         """Create event with auto-generated UUID code."""

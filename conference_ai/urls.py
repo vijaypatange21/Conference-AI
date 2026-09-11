@@ -14,7 +14,6 @@ from events.views import EventViewSet
 
 from attendees.views import (
     AttendeeViewSet,
-    AttendeeJoinViewSet,
 )
 
 from recognition.views import (
@@ -51,11 +50,7 @@ router.register(
 # IMPORTANT
 # This enables:
 # POST /api/events/join/
-router.register(
-    r'events',
-    AttendeeJoinViewSet,
-    basename='event-join'
-)
+# Note: Event join endpoint is implemented as an action on EventViewSet
 
 # =====================================
 # Recognition Routes

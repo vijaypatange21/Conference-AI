@@ -1,5 +1,24 @@
 from rest_framework import serializers
 from interactions.models import Interaction
+from attendees.models import Attendee
+
+
+class ConnectedAttendeeSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
+    first_name = serializers.CharField(source='user.first_name', read_only=True)
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
+    email = serializers.CharField(source='user.email', read_only=True)
+
+    class Meta:
+        model = Attendee
+        fields = [
+            'id',
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'selfie',
+        ]
 
 
 class InteractionDetailSerializer(serializers.ModelSerializer):
@@ -23,9 +42,10 @@ class InteractionDetailSerializer(serializers.ModelSerializer):
 
     def get_connected_attendee(self, obj):
         request = self.context.get('request')
+        if not request:
+            return None
 
         current_attendee = getattr(request, 'current_attendee', None)
-
         if not current_attendee:
             return None
 
@@ -35,13 +55,7 @@ class InteractionDetailSerializer(serializers.ModelSerializer):
             else obj.attendee1
         )
 
-        return {
-            "id": other.id,
-            "username": other.user.username if other.user else None,
-            "email": other.user.email if other.user else None,
-            "role": getattr(other, 'role', 'Attendee'),
-            "selfie": other.selfie.url if getattr(other, 'selfie', None) else None,
-        }
+        return ConnectedAttendeeSerializer(other, context=self.context).data
 
 
 class InteractionListSerializer(serializers.ModelSerializer):

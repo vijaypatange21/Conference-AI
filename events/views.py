@@ -93,15 +93,20 @@ class EventViewSet(viewsets.ModelViewSet):
     def images(self, request, pk=None):
         """
         List all images for an event.
-        
+
         GET /events/{id}/images
-        
+
         Returns: Array of EventImage with detection status
         """
-        
+
         event = self.get_object()
-        images = EventImage.objects.filter(event=event).order_by('-start_date')
-        
+
+        images = (
+            EventImage.objects
+            .filter(event=event)
+            .order_by('-uploaded_at')
+        )
+
         serializer = EventImageDetailSerializer(images, many=True)
         return Response(serializer.data)
 

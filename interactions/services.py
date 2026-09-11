@@ -66,17 +66,17 @@ def increment_interaction_score(
                 event=event,
                 attendee1=attendee1,
                 attendee2=attendee2,
-                defaults={'score': 0}
+                defaults={'interaction_score': 0}
             )
             
             # Increment score
-            interaction.score += score_increment
-            interaction.save(update_fields=['score'])
+            interaction.interaction_score += score_increment
+            interaction.save(update_fields=['interaction_score'])
             
             action = "Created" if created else "Updated"
             logger.debug(
                 f"{action} interaction between {attendee1.user.username} "
-                f"and {attendee2.user.username}: score = {interaction.score}"
+                f"and {attendee2.user.username}: score = {interaction.interaction_score}"
             )
             
             return interaction
@@ -186,7 +186,7 @@ def get_attendee_connections(attendee: Attendee, event: Event = None) -> List[Tu
     # Query interactions where this attendee is in either position
     query = Interaction.objects.filter(
         models.Q(attendee1=attendee) | models.Q(attendee2=attendee)
-    ).select_related('attendee1', 'attendee2', 'event')
+    ).select_related('attendee1__user', 'attendee2__user', 'event')
     
     if event:
         query = query.filter(event=event)
@@ -199,7 +199,7 @@ def get_attendee_connections(attendee: Attendee, event: Event = None) -> List[Tu
             if interaction.attendee1 == attendee
             else interaction.attendee1
         )
-        connections.append((other_attendee, interaction.score))
+        connections.append((other_attendee, interaction.interaction_score))
     
     # Sort by score descending (strongest connections first)
     connections.sort(key=lambda x: x[1], reverse=True)
