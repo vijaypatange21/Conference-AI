@@ -7,7 +7,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from auth.views import CurrentUserView
+from auth.views import CurrentUserView, RegisterView
 
 # Import ViewSets
 from events.views import EventViewSet
@@ -96,7 +96,11 @@ urlpatterns = [
         include('rest_framework.urls')
     ),
 
-    # JWT Authentication
+    path(
+        'api/auth/register/',
+        RegisterView.as_view(),
+        name='register',
+    ),
     path(
         'api/auth/login/',
         TokenObtainPairView.as_view(),
