@@ -1,26 +1,29 @@
-# AI Conference Networking Finder - Python 3.12 compatible
+
+# AI Conference Networking Finder - Python 3.12
 
 # Core Django
 Django==4.2.11
-psycopg2-binary==2.9.9
-
-# REST Framework
-djangorestframework==3.14.0
-djangorestframework-simplejwt==5.5.1
+gunicorn
+whitenoise
 
 # Database & Vector Search
-pgvector==0.3.1
+psycopg2-binary==2.9.9
 psycopg[binary]==3.1.13
+pgvector==0.3.1
+
+# REST Framework & Authentication
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.5.1
 
 # Face Recognition & AI
 insightface==0.7.3
 onnxruntime==1.18.0
 onnx==1.16.1
 numpy==1.26.4
-opencv-python==4.10.0.84
+opencv-python-headless==4.10.0.84
 Pillow==10.3.0
 
-# Async
+# Async Tasks & Caching
 celery==5.3.6
 redis==5.0.4
 kombu==5.3.7
@@ -29,7 +32,7 @@ kombu==5.3.7
 python-dotenv==1.0.1
 python-decouple==3.8
 
-# Dev
+# Testing & Development
 pytest==8.2.0
 pytest-django==4.8.0
 django-extensions==3.2.3
