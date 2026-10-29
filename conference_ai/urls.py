@@ -8,6 +8,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from auth.views import CurrentUserView, RegisterView
+from django.http import JsonResponse
 
 # Import ViewSets
 from events.views import EventViewSet
@@ -72,6 +73,11 @@ router.register(
     basename='interaction'
 )
 
+def health_check(request):
+    return JsonResponse({"status": "ok"})
+
+    
+
 # =====================================
 # URL Patterns
 # =====================================
@@ -116,6 +122,7 @@ urlpatterns = [
         CurrentUserView.as_view(),
         name='current_user',
     ),
+    path("health/", health_check, name="health-check"),
 ]
 
 # =====================================
