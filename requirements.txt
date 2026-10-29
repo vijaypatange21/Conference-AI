@@ -3,7 +3,8 @@
 
 # Web framework and API
 Django==4.2.11
-gunicorn
+dj-database-url
+gunicorn==21.2.0
 whitenoise
 
 # Database & Vector Search
