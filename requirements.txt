@@ -1,7 +1,7 @@
 
 # AI Conference Networking Finder - Python 3.12
 
-# Core Django
+# Web framework and API
 Django==4.2.11
 gunicorn
 whitenoise
@@ -15,22 +15,22 @@ pgvector==0.3.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.5.1
 
-# Face Recognition & AI
+# Face recognition and image processing
 insightface==0.7.3
-onnxruntime==1.18.0
 onnx==1.16.1
+onnxruntime==1.18.0
 numpy==1.26.4
 opencv-python-headless==4.10.0.84
 Pillow==10.3.0
 
 # Async Tasks & Caching
 celery==5.3.6
-redis==5.0.4
 kombu==5.3.7
+redis==5.0.4
 
-# Utilities
+# Configuration and data seeding
 python-dotenv==1.0.1
-python-decouple==3.8
+Faker==26.0.0
 
 # Testing & Development
 pytest==8.2.0
