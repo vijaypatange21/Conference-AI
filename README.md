@@ -2,6 +2,8 @@
 
 A dashboard-first conference networking product where each attendee creates a username and password, uploads a selfie, gets matched from group photos, and sees a live discovery panel ranked by interaction score.
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)]([https://conference-ai.vijaipatange.in/])
+
 ## Product Flow
 
 1. Attendee signs up with a unique username and password.
