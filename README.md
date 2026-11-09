@@ -4,6 +4,11 @@ A dashboard-first conference networking product where each attendee creates a us
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://conference-ai.vijaipatange.in/)
 
+
+## Project Insights
+
+<img width="900" height="506" alt="demo" src="https://github.com/user-attachments/assets/a65f9949-c70e-4403-b117-50626bd6e3a8" />
+
 ## Product Flow
 
 1. Attendee signs up with a unique username and password.
